@@ -28,7 +28,7 @@ public class ProductRepository {
     public Product editProduct(Product targetProduct) {
         String targetProductId = targetProduct.getProductId();
         String newName = targetProduct.getProductName();
-        String newQuantity = targetProduct.getProductQuantity();
+        int newQuantity = targetProduct.getProductQuantity();
         for (Product storedProduct : productData) {
             String storedProductId = storedProduct.getProductId();
             if (storedProductId.equals(targetProductId)) {
