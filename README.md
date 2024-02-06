@@ -1,4 +1,5 @@
 Module 1 - Coding Standards
+
 Reflection 1
 Pertama, saya sudah melakukan penamaan variabel yang jelas, sesuai dengan data yang disimpan sehingga tidak memerlukan komentar untuk menjelaskan variabelnya.
 Kedua, saya bisa melihat dari aspek penulisan komentar. Sebelum saya mengikuti perkuliahan Pemrograman Lanjut, terkadang saya masih menuliskan komentar terhadap alur program yang sebenarnya sudah jelas dari penamaan variabel serta alurnya, atau menuliskan kode yang terlalu panjang yang seharusnya bisa di-refactor menjadi beberapa variabel dengan penamaan variabel yang jelas. Kebiasaan tersebut sudah saya coba tinggalkan dan di sini saya menerapkan aturan penulisan kode yang sesuai dengan prinsip clean code. Saya tidak menuliskan komentar sama sekali di kode saya karena saya merasa penamaan variabel serta alur program sudah jelas sehingga tidak memerlukan komentar.
