@@ -52,7 +52,7 @@ class CreateProductFunctionalTest {
         String productNameInput="Porsche 911 GT3 RS";
         nameInput.sendKeys(productNameInput);
 
-        WebElement quantityInput=driver.findElement(By.className("quantityInput"));
+        WebElement quantityInput=driver.findElement(By.id("quantityInput"));
         quantityInput.clear();
         String quantity="1";
         quantityInput.sendKeys(quantity);
