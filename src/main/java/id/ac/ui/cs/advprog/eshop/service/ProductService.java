@@ -5,9 +5,9 @@ import id.ac.ui.cs.advprog.eshop.model.Product;
 import java.util.List;
 
 public interface ProductService {
-    public Product create(Product product);
-    public List<Product> findAll();
-    public Product find(String productId);
-    public Product editProduct(Product targetProduct);
-    public Product deleteProduct(Product targetProduct);
+    Product create(Product product);
+    List<Product> findAll();
+    Product find(String productId);
+    Product editProduct(Product targetProduct);
+    Product deleteProduct(Product targetProduct);
 }
