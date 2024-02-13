@@ -1,3 +1,8 @@
+Module 2 - CI/CD & DevOps
+
+1. Code quality issue yang muncul pada PMD adalah penggunaan access modifier public pada semua method di interface ProductService. Secara implisit, method pada interface sudah memiliki access modifier public sehingga memberikan public pada method dapat dibilang redundan. Memperbaiki issue tersebut mudah, hanya perlu menghapus setiap modifier public pada setiap method.
+2. Ya, implementasi CI/CD workflows saat ini memenuhi definisi Continuous Integration and Continuous Deployment. Setiap commit dan push, dijalankan code scanning dengan OSSF Scorecard dan PMD. Instruksi tersebut dapat dikonfigurasi pada file ci.yml. Hal tersebut sejalan dengan konsep Continuous Integration. Selain itu, dijalankan juga proses deploy untuk versi web terbaru pada Koyeb yang sejalan dengan konsep Continuous Deployment.
+
 Module 1 - Coding Standards
 
 Reflection 1
