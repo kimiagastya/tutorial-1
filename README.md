@@ -1,4 +1,4 @@
-Module 2 - CI/CD & DevOps
+Module 2 - CI/CD & DevOps <br>
 Link deployment https://tutorial-1-adpro-kimiagastya.koyeb.app/
 
 1. Code quality issue yang muncul pada PMD adalah penggunaan access modifier public pada semua method di interface ProductService. Secara implisit, method pada interface sudah memiliki access modifier public sehingga memberikan public pada method dapat dibilang redundan. Memperbaiki issue tersebut mudah, hanya perlu menghapus setiap modifier public pada setiap method.
