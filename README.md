@@ -1,3 +1,22 @@
+Module 3 - Maintainability & OO Principles <br>
+1. SRP (Single Responsibily Principle) adalah prinsip yang menyebutkan bahwa sebuah class harus melakukan satu hal saja. Contoh penerapannya dalam tutorial ini adalah saya memisahkan ProductController dengan CarController karena kedua class tersebut melakukan tugas yang berbeda. CarController juga tidak menggunakan method pada ProductController sehingga extension ProductController dihapus.
+2. OCP (Open-Closed Principle) adalah prinsip yang menyebutkan bahwa suatu modul harus bisa ditambah fiturnya (di-extends) tanpa harus memodifikasi code yang sudah ada. Contoh penerapannya dalam tutorial ini adalah untuk menambahkan class Car pada project, saya hanya perlu untuk membuat class-class baru tanpa memodifikasi file yang sudah pernah dibuat.
+3. LSP (Liskov Substitution Principle) adalah prinsip yang menyebutkan bahwa subclass harus memiliki perilaku yang sesuai dengan superclassnya. Contoh penerapan dalam tutorial ini adalah ProductServiceImpl dan CarServiceImpl melakukan tugasnya sesuai yang diharapkan dari interfacenya masing-masing.
+4. ISP (Interface Segregation Principle) adalah prinsip yang menyebutkan untuk tidak mengharuskan penggunaan interface yang tidak dipakai. Dalam tutorial ini, interface CarService dan ProductService sama-sama berperan sesuai fungsinya dan tidak ada yang "menganggur".
+5. DIP (Dependency Inversion Principle) adalah prinsip yang menyebutkan bahwa sebuah modul high-level harus bergantung kepada abstarksi, bukan implementasinya. Contoh penerapan dalam tutorial ini adalah pada CarController.java dengan mengganti reference CarServiceImpl menjadi CarService yang merupakan abstract class nya.
+
+Kelebihan menerapkan SOLID
+1. Dengan SRP, kode lebih mudah dipahami karena satu class hanya menangani satu tugas
+2. Dengan OCP, kode lebih mudah untuk ditambah fiturnya
+3. Dengan LSP, dapat meningkatkan code reusability karena subclass bekerja sesuai dengan harapan superclassnya
+4. Dengan ISP, dapat mempersingkat kode dengan membuat interface yang lebih spesifik
+5. Dengan DIP, dapat meningkatkan decoupling yang membuat project lebih mudah ditambah fiturnya atau di-refactor.
+
+Kekurangan tidak Menerapkan SOLID
+1. Kode lebih sulit dipahami
+2. Kode harus dimodifikasi jika ingin menambahkan fitur, akan menambah kompleksitas project.
+3. Sulit untuk menemukan bug pada project
+
 Module 2 - CI/CD & DevOps <br>
 Link deployment https://tutorial-1-adpro-kimiagastya.koyeb.app/
 
