@@ -1,3 +1,12 @@
+Module 4 - Refactoring and TDD<br>
+1. Ya, alur dari Test Driven Development berguna bagi saya karena ini merupakan approach development yang berbeda dari approach lainnya yang sebelumnya saya ketahui, yang tentunya menambah wawasan saya. Setelah memahami TDD, saya paham bahwa penting untuk mengantisipasi bug yang akan muncul pada kode yang kita buat. Maka dari itu, penting untuk membuat test terlebih dahulu sebelum membuat implementasi kode agar tidak menyesal ketika bug sudah terlanjur menumpuk banyak.
+2. Ya, tests yang saya buat sudah sesuai dengan F.I.R.S.T. principles
+   1) Fast: Test untuk tiap class dibuat masing-masing, tidak digabung menjadi satu sehingga membuat test berjalan cepat tanpa mengganggu workflow
+   2) Isolated/Independent: Test yang dibuat tidak bergantung pada class lain
+   3) Repeatable: Hasil tes konsisten karena mengimplementasikan mocking
+   4) Self-Validating: Test sudah menggunakan assertions untuk melihat apakah test sukses atau gagal
+   5) Thorough/Timely: Test yang dibuat sudah men-cover happy dan unhappy path
+
 Module 3 - Maintainability & OO Principles <br>
 1. SRP (Single Responsibily Principle) adalah prinsip yang menyebutkan bahwa sebuah class harus melakukan satu hal saja. Contoh penerapannya dalam tutorial ini adalah saya memisahkan ProductController dengan CarController karena kedua class tersebut melakukan tugas yang berbeda. CarController juga tidak menggunakan method pada ProductController sehingga extension ProductController dihapus.
 2. OCP (Open-Closed Principle) adalah prinsip yang menyebutkan bahwa suatu modul harus bisa ditambah fiturnya (di-extends) tanpa harus memodifikasi code yang sudah ada. Contoh penerapannya dalam tutorial ini adalah untuk menambahkan class Car pada project, saya hanya perlu untuk membuat class-class baru tanpa memodifikasi file yang sudah pernah dibuat.
