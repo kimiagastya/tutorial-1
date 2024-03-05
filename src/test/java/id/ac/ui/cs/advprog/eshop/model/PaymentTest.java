@@ -38,7 +38,7 @@ class PaymentTest {
         // Setup orders
         Order order1 = new Order("13652556-012a-4c07-b546-54eb1396d79b", this.products, 1708560000L, "Safira Sudrajat");
         Order order2 = new Order("93652556-012a-4c07-b546-54eb1396d79b", this.products, 1708570000L, "Bambang Bambang");
-
+        this.orders = new ArrayList<Order>();
         this.orders.add(order1);
         this.orders.add(order2);
     }
