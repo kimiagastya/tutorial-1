@@ -84,7 +84,7 @@ class OrderServiceImplTest {
         doReturn(order).when(orderRepository).findById(order.getId());
 
         assertThrows(IllegalArgumentException.class,
-                () -> orderService.updateStatus(order.getId(), "MEOW"));
+                () -> orderService.updateStatus(order.getId(), "Test"));
 
         verify(orderRepository, times(0)).save(any(Order.class));
     }

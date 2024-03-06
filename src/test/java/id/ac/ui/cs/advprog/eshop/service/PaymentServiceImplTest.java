@@ -60,7 +60,7 @@ class PaymentServiceImplTest {
     @Test
     void testCreatePaymentVoucherCode() {
         String id = "75c64e96-d4d7-454b-8ee5-7086efff516c";
-        Payment payment = new PaymentVoucherCode(id, orders.get(1), paymentDatas.get(0));
+        Payment payment = new PaymentVoucher(id, orders.get(1), paymentDatas.get(0));
 
         doReturn(null).when(paymentRepository).findById(id);
         doReturn(payment).when(paymentRepository).save(any(Payment.class));
@@ -74,7 +74,7 @@ class PaymentServiceImplTest {
     @Test
     void testInvalidPaymentMethod() {
         String id = "75c64e96-d4d7-454b-8ee5-7086efff516c";
-        Payment payment = new PaymentVoucherCode(id, orders.get(1), paymentDatas.get(0));
+        Payment payment = new PaymentVoucher(id, orders.get(1), paymentDatas.get(0));
 
         doReturn(null).when(paymentRepository).findById(id);
         assertThrows(IllegalArgumentException.class,
@@ -87,7 +87,7 @@ class PaymentServiceImplTest {
     @Test
     void testCreatePaymentIfAlreadyExists() {
         String id = "75c64e96-d4d7-454b-8ee5-7086efff516c";
-        Payment payment = new PaymentVoucherCode(id, orders.get(1), paymentDatas.get(0));
+        Payment payment = new PaymentVoucher(id, orders.get(1), paymentDatas.get(0));
 
         doReturn(payment).when(paymentRepository).findById(payment.getId());
 
@@ -100,7 +100,7 @@ class PaymentServiceImplTest {
         Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentDatas.get(0));
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
 
-        Payment newPayment = new PaymentVoucherCode(payment.getId(), payment.getOrder(), paymentDatas.get(1));
+        Payment newPayment = new PaymentVoucher(payment.getId(), payment.getOrder(), paymentDatas.get(1));
 
 
         doReturn(payment).when(paymentRepository).findById(payment.getId());
