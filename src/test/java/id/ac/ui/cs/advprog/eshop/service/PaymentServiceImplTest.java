@@ -22,7 +22,7 @@ class PaymentServiceImplTest {
     PaymentServiceImpl paymentService;
     @Mock
     PaymentRepository paymentRepository;
-    List<Map<String, String>> paymentData;
+    List<Map<String, String>> paymentDatas;
     List<Order> orders;
 
     @BeforeEach
@@ -43,47 +43,64 @@ class PaymentServiceImplTest {
         Order order2 = new Order("7f9e15bb-4b15-42f4-aebc-c3af385fb078", products, 1708570000L, "Safira Sudrajat");
         orders.add(order2);
 
+
         // Make payment datas
+        paymentDatas = new ArrayList<>();
+
         Map<String, String> paymentData1 = new HashMap<String, String>();
         paymentData1.put("voucherCode", "ESHOP1234ABC5678");
-        paymentData.add(paymentData1);
+        paymentDatas.add(paymentData1);
 
         Map<String, String> paymentData2 = new HashMap<String, String>();
         paymentData2.put("address", "Bahrain");
         paymentData2.put("deliveryFee", "10000");
-        paymentData.add(paymentData2);
+        paymentDatas.add(paymentData2);
     }
 
     @Test
     void testCreatePaymentVoucherCode() {
         String id = "75c64e96-d4d7-454b-8ee5-7086efff516c";
-        Payment payment = new PaymentVoucherCode(id, orders.get(1), paymentData.get(0));
+        Payment payment = new PaymentVoucherCode(id, orders.get(1), paymentDatas.get(0));
 
-        doReturn(payment).when(paymentRepository).save(payment);
-        Payment result = paymentService.addPayment(id, orders.get(1), "VOUCHER_CODE", paymentData.get(0));
+        doReturn(null).when(paymentRepository).findById(id);
+        doReturn(payment).when(paymentRepository).save(any(Payment.class));
 
-        verify(paymentRepository, times(1)).save(payment);
+        Payment result = paymentService.addPayment(id, orders.get(1), "VOUCHER_CODE", paymentDatas.get(0));
+
+        verify(paymentRepository, times(1)).save(any(Payment.class));
         assertEquals(payment.getId(), result.getId());
+    }
+
+    @Test
+    void testInvalidPaymentMethod() {
+        String id = "75c64e96-d4d7-454b-8ee5-7086efff516c";
+        Payment payment = new PaymentVoucherCode(id, orders.get(1), paymentDatas.get(0));
+
+        doReturn(null).when(paymentRepository).findById(id);
+        assertThrows(IllegalArgumentException.class,
+                () -> paymentService.addPayment(id, orders.get(1), "Tes1", paymentDatas.get(0)));
+
+        verify(paymentRepository, times(0)).save(payment);
     }
 
 
     @Test
     void testCreatePaymentIfAlreadyExists() {
         String id = "75c64e96-d4d7-454b-8ee5-7086efff516c";
-        Payment payment = new PaymentVoucherCode(id, orders.get(1), paymentData.get(0));
+        Payment payment = new PaymentVoucherCode(id, orders.get(1), paymentDatas.get(0));
 
         doReturn(payment).when(paymentRepository).findById(payment.getId());
 
-        assertNull(paymentService.addPayment(id, orders.get(1), "VOUCHER_CODE", paymentData.get(0)));
+        assertNull(paymentService.addPayment(id, orders.get(1), "VOUCHER_CODE", paymentDatas.get(0)));
         verify(paymentRepository, times(0)).save(payment);
     }
 
     @Test
     void testSetStatus() {
-        Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentData.get(0));
+        Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentDatas.get(0));
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
 
-        Payment newPayment = new PaymentVoucherCode(payment.getId(), payment.getOrder(), paymentData.get(1));
+        Payment newPayment = new PaymentVoucherCode(payment.getId(), payment.getOrder(), paymentDatas.get(1));
 
 
         doReturn(payment).when(paymentRepository).findById(payment.getId());
@@ -99,13 +116,13 @@ class PaymentServiceImplTest {
 
     @Test
     void testSetStatusInvalidStatus() {
-        Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentData.get(0));
+        Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentDatas.get(0));
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
 
         doReturn(payment).when(paymentRepository).findById(payment.getId());
 
         assertThrows(IllegalArgumentException.class,
-                () -> paymentService.setStatus(payment, "Test"));
+                () -> paymentService.setStatus(payment, "Tes"));
 
         verify(paymentRepository, times(0)).save(any(Payment.class));
     }
@@ -113,7 +130,7 @@ class PaymentServiceImplTest {
 
     @Test
     void testSetStatusInvalidPaymentId() {
-        Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentData.get(0));
+        Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentDatas.get(0));
 
         doReturn(null).when(paymentRepository).findById(payment.getId());
 
@@ -125,7 +142,7 @@ class PaymentServiceImplTest {
 
     @Test
     void testGetPaymentIfIdFound() {
-        Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentData.get(0));
+        Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentDatas.get(0));
 
         doReturn(payment).when(paymentRepository).findById(payment.getId());
 
@@ -135,14 +152,14 @@ class PaymentServiceImplTest {
 
     @Test
     void testGetPaymentIfIfIdNotFound() {
-        Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentData.get(0));
+        Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentDatas.get(0));
 
         assertNull(paymentService.getPayment(payment.getId()));
     }
 
     @Test
     void testGetAllPayments() {
-        Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentData.get(0));
+        Payment payment = new PaymentCashOnDelivery("75c64e96-d4d7-454b-8ee5-7086efff516c", orders.get(1), paymentDatas.get(0));
         List<Payment> payments = new ArrayList<>();
         payments.add(payment);
 
